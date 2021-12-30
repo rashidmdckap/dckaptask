@@ -1,0 +1,81 @@
+<?php
+$regionList = $block->getRegion('usa');
+$data = $block->getAllData();
+$name = '';
+$dob = '';
+$age = '';
+$country='';
+if ($data->getentity_id()) {
+$name = $data->getcustom_name();
+$age = $data->getcustom_age();
+$dob = $data->getcustom_dob();
+$country = $data->getcustom_country();
+}
+?>
+<?php
+/**
+ * Helper Function calling
+ */
+$yourHelperData = $this->helper('DCKAP\NewModule\Helper\Data');
+/**
+ * Method getenble value  for sysconfig
+ */
+$sysconfigenable=$yourHelperData->getEnable();
+if($sysconfigenable==1){?>
+<form name="addData" method="post" id="addData" class="form"
+      action="<?php echo $this->getFormAction(); ?>"
+      data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+      data-mage-init='{"validation":{}}'>    <fieldset>
+        <?php
+        if ($data->getentity_id()) {
+            ?>
+            <input type="hidden" name="entity_id" value="<?php echo $data->getentity_id(); ?>">
+            <?php
+        } ?>
+        <legend>Customer:</legend>
+        Name:<br>
+        <input type="text" name="custom_name" minlength="3" value="<?php echo $name ?>" placeholder="Enter First Name" required>
+        <br>
+        Age:<br>
+        <input type="number" name="custom_age"  value="<?php echo $age ?>" placeholder="Enter Age" required>
+        <br>
+        DOB:<br>
+        <input type="text" name="custom_dob" id="custom_dob" class="datepicker" value="<?php if($dob!='') echo date('m/d/Y', strtotime($dob)); else echo '';  ?>"  placeholder="Select Date of Birth" required>
+        <script>
+            require(["jquery", "mage/calendar"], function($){
+                $("#custom_dob").datepicker({
+                    dateFormat:'mm/dd/yy',
+                    maxDate: new Date(),
+                    changeDate: true,
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:2025',
+                    showMonthAfterYear: false,
+                })
+            });
+        </script>
+        Country:<br>
+        <select name="custom_country" required>
+            <?php
+            foreach($regionList as $val){
+                $selected=($country==$val['value'])?'selected':'';
+                echo "<option value='".$val['value'] ."' $selected>".$val['label'] ."</option>";
+            }
+            ?>
+        </select>
+        <br><br>
+        <br>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary" title="Save"><span><?= $block->
+                    escapeHtmlAttr(__('Save')) ?></span></button>
+            <a class="action submit primary" href="<?php echo $this->getViewAllPage(); ?>" title="View All"><span><?= $block->
+                    escapeHtmlAttr(__('View All')) ?></span></a>
+        </div>
+    </div>
+</form>
+<?php }else{ ?>
+    <h1 class="text-center">Registration Close<h1>
+<?php } ?>
+

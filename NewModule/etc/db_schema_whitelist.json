@@ -1,0 +1,15 @@
+{
+    "custom_table": {
+        "column": {
+            "entity_id": true,
+            "reference_id": true,
+            "custom_name": true,
+            "custom_age": true,
+            "custom_dob": true,
+            "custom_country": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

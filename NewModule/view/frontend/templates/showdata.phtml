@@ -1,0 +1,58 @@
+<?php
+$collection = $block->getCollection();
+
+if ($collection->count()) {
+    ?>
+    <?php
+    /**
+     * Helper Function calling
+     */
+    $yourHelperData = $this->helper('DCKAP\NewModule\Helper\Data');
+    /**
+     * Method getenble value  for sysconfig
+     */
+    $sysconfigenable=$yourHelperData->getEnable();
+    if($sysconfigenable==1){?>
+    <div class="primary" align="right">
+        <a class="action submit primary" href="<?php echo $this->getFormPage(); ?>" title="Add New"><span><?= $block->
+            escapeHtmlAttr(__('Add New')) ?></span></a>
+    </div><?php }?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?php echo __('Grid Record') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col name"><?php echo __('Name') ?></th>
+                <th scope="col" class="col age"><?php echo __('Age') ?></th>
+                <th scope="col" class="col dob"><?php echo __('Date of Birth') ?></th>
+                <th scope="col" class="col country"><?php echo __('Country') ?></th>
+                <th scope="col" class="col action"><?php echo __('Action') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($collection as $item): ?>
+                <tr>
+                    <td data-th="<?= $block->escapeHtml(__('Name')) ?>" class="col name">
+                        <?php echo $item->getcustom_name() ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Age')) ?>" class="col email">
+                        <?php echo $item->getcustom_age() ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Date of Birth')) ?>"
+                        class="col title"><?php echo date('m/d/Y', strtotime($item->getcustom_dob())); ?></td>
+                    <td data-th="<?= $block->escapeHtml(__('Country')) ?>" class="col telephone">
+                        <?php $countryid=$item->getcustom_country(); $country=$block->getRegionData($countryid); echo $country['name'];  //echo $block->getRegionName(2);  ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Action')) ?>" class="col delete">
+                        <a href="<?php echo $block->getDeleteAction() . 'entity_id/' . $item->getId(); ?>"><?php echo __('Delete') ?></a>
+                        <a style="margin-left: 9px" href="<?php echo $block->getEditAction() . 'entity_id/' . $item->getId(); ?>"><?php echo __('Edit') ?></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+}
+?>

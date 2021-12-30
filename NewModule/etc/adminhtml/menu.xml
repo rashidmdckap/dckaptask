@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="DCKAP_NewModule::menu" title="DCKAP" module="DCKAP_NewModule" sortOrder="51" resource="Magento_Backend::content"/>
+        <add id="DCKAP_NewModule::customer" title="Manage Customers" module="DCKAP_NewModule" sortOrder="30" parent="DCKAP_NewModule::menu" action="newmodule/customer" resource="DCKAP_NewModule::customer"/>
+        <!--        <add id="DCKAP_NewModule::menu_item" title="Configuration" module="DCKAP_NewModule" sortOrder="99" parent="DCKAP_NewModule::menu" action="newmodule/customer/index" resource="DCKAP_NewModule::menu_item"/>-->
+
+        <!--        <add id="DCKAP_NewModule::menu_customer" title="Customer" module="DCKAP_NewModule" sortOrder="99" parent="DCKAP_NewModule::menu" action="newmodule/customer/index" resource="DCKAP_NewModule::menu_customer"/>-->
+    </menu>
+</config>
