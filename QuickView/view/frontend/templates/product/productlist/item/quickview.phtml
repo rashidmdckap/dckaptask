@@ -1,0 +1,15 @@
+<?php /** @var Magento\Catalog\Block\Product\ProductList\Item\Block $block */
+//if($block->getProduct()->getData('pre_orders') == 1){
+?>
+<button type="button"
+        id="quickViewButton<?php /* @noEscape */ echo $block->getProduct()->getId() ?>"
+        class="button-quickview"
+        data-mage-init='{ "DCKAP_QuickView/js/product/productlist/item/quickview": { } }'
+        data-id="<?php /* @noEscape */ echo $block->getProduct()->getId() ?>"
+        data-url="<?php /* @noEscape */ echo $block->getProductUrl($block->getProduct()) ?>">
+    <?php /* @noEscape */ echo __('Quick view') ?>
+</button>
+<?php
+//}
+?>
+<div id="quickViewContainer<?php /* @noEscape */ echo $block->getProduct()->getId() ?>"></div>
